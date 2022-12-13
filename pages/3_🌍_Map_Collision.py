@@ -6,21 +6,21 @@ import pydeck as pdk
 
 st.title("Vehicle collisions")
 
-# Leer dataframe
+# Read DataFrame
 df = pd.read_csv('NYC.csv')
 
-# Filtramos solo datos validos para la localizacion y el distrito
+# Filter out the Nan from the selected columns: Longitude, latitute, borough
 mask = (df['LATITUDE'].isna())|(df['LONGITUDE'].isna())|(df['BOROUGH'].isna())
 df_ = df[~mask]
-df_.reset_index(drop=True,inplace=True)
-df_ = df_.rename(columns={'LATITUDE':'latitude','LONGITUDE':'longitude'})
+df_.reset_index(drop=True,inplace=True) # reset index
+df_ = df_.rename(columns={'LATITUDE':'latitude','LONGITUDE':'longitude'}) #pydeck does not allow capital letters
 
-# Distritos sin NaN
+# boroughs without NaN
 dist = list(df_['BOROUGH'].unique())
 dist.append('All')
 
 selected_dist = st.selectbox(
-    "What do want the BOROUGH?",
+    "Select a borough",
     dist
 )
 
@@ -32,7 +32,7 @@ if selected_dist in dist[:-1]:
 else:
 	df_acc = df_.copy()
 	mid = [np.average(df_acc['latitude']),np.average(df_acc['longitude'])]
-	st.header(f'Accidentes para {selected_dist} distritos')
+	st.header(f'Accidents in {selected_dist}')
 
 
 pyd = pdk.Deck(map_style="mapbox://styles/mapbox/light-v9",
