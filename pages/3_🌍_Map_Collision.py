@@ -28,7 +28,7 @@ if selected_dist in dist[:-1]:
     df_acc = df_[(df_['BOROUGH']==selected_dist)]
     df_acc.reset_index(drop = True, inplace = True)
     mid = [np.average(df_acc['latitude']),np.average(df_acc['longitude'])]
-    st.header(f'Accidentes para el distrito {selected_dist}')
+    st.header(f'Accidents in {selected_dist}')
 else:
 	df_acc = df_.copy()
 	mid = [np.average(df_acc['latitude']),np.average(df_acc['longitude'])]
