@@ -32,7 +32,7 @@ if selected_dist in dist[:-1]:
 else:
 	df_acc = df_.copy()
 	mid = [np.average(df_acc['latitude']),np.average(df_acc['longitude'])]
-	st.header(f'Accidents in {selected_dist}')
+	st.header(f'Accidents in {selected_dist} boroughs')
 
 
 pyd = pdk.Deck(map_style="mapbox://styles/mapbox/light-v9",
