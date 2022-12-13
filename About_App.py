@@ -6,24 +6,22 @@ st.set_page_config(
     page_icon="👋",
 )
 
-st.write("# Welcome to Streamlit! 👋")
+st.write("# This is the New York Vehicle Collision Report! 👋")
 
 #st.sidebar.success("Select a demo above.")
 
 st.markdown(
     """
-    Streamlit is an open-source app framework built specifically for
-    Machine Learning and Data Science projects.
-    **👈 Select a demo from the sidebar** to see some examples
-    of what Streamlit can do!
-    ### Want to learn more?
-    - Check out [streamlit.io](https://streamlit.io)
-    - Jump into our [documentation](https://docs.streamlit.io)
-    - Ask a question in our [community
-        forums](https://discuss.streamlit.io)
-    ### See more complex demos
-    - Use a neural net to [analyze the Udacity Self-driving Car Image
-        Dataset](https://github.com/streamlit/demo-self-driving)
-    - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+    The global collision index is continuously recording greater levels of accidents. The statistics speak for 
+    themselves and they are quite concerning. Each year, 1.35 million are killed in transit-related accidents
+    worldwide. This figure translates into a daily 3,700 people killed in crashes in which the most affected 
+    are pedestrians, motorcyclists, and cyclists, representing almost half of the parties killed. As this figure
+    exacerbates year over year, it is relevant to provide an outlook on New York City’s vehicle collision record as 
+    one of the foremost economic hubs in the USA. This report will help individuals and organizations
+    within New York City to be aware of the situation concerning vehicle collisions by visualizing the 
+    locations with the greatest collision index, displaying the main causes leading to collisions, and 
+    comparing the aftermath in injured-killed parties. 
 """
 )
+
+#collision image?
