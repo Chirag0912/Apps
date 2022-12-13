@@ -13,45 +13,44 @@ st.markdown("# Collision Range")
 # Leer dataframe
 df = pd.read_csv('NYC.csv')
 
-# Distritos sin NaN
+# borough list without NaN values
 dist = list(df['BOROUGH'].dropna().unique())
 
-selected_dist = st.selectbox(
-    "What do want the BOROUGH?",
+selected_dist = st.selectbox( #input: user can select a borough from the dist variable, drop-down menu.
+    "Select a borough",
     dist
 )
 
-# Muestra caklendario y permite seleccionar
+#  Displays calendar and allows selection. Selects min_value for date
 date_ini = st.date_input(
-    "Date Inic: ",
-     min_value = datetime.date(2010, 1, 1) )
+    "Initial Date: ",
+     min_value = datetime.date(2010, 1, 1))
 
-# Input for user
+# Ending date. Sets min_value for date
 date_end = st.date_input(
-    "Date End: ",
-     min_value = datetime.date(2010, 1, 1) )
+    "Ending Date: ",
+     min_value = datetime.date(2010, 1, 1))
 
-# Filter data for renge date and distrit
-date_ini = pd.to_datetime(date_ini, format="%Y-%m-%d") # Conertir a DateTime
-date_end = pd.to_datetime(date_end, format="%Y-%m-%d")
+# Filter data for date range and borough
+date_ini = pd.to_datetime(date_ini, format="%Y-%m-%d") #Turn into Datatime: Converting date_in into a pd.to_datatime, this serves to compare dates.
+date_end = pd.to_datetime(date_end, format="%Y-%m-%d") #The same here
 
-df["DATE"] = pd.to_datetime(df["DATE"] , infer_datetime_format=True)
+df["DATE"] = pd.to_datetime(df["DATE"], infer_datetime_format=True) #Turns "DATE" Column into pd.to_datatime
 
-df_acc = df[(df['BOROUGH']==selected_dist)&(df['DATE']>=date_ini)&(df['DATE']<=date_end)]
-df_acc.reset_index(drop = True, inplace = True)
+df_acc = df[(df['BOROUGH'] == selected_dist) & (df['DATE'] >= date_ini) & (df['DATE'] <= date_end)] #New dataframe. Filter data frame according to INPUT.
+df_acc.reset_index(drop = True, inplace = True) #Reset index.
 
-if df_acc.shape[0]>0:
+if df_acc.shape[0] > 0:
     total = [df_acc[col].sum() for col in ['PERSONS INJURED','PERSONS KILLED','PEDESTRIANS INJURED','PEDESTRIANS KILLED','CYCLISTS INJURED','CYCLISTS KILLED','MOTORISTS INJURED','MOTORISTS KILLED']]
+    #we get the total number of injured/death parties. moves trough columns, and adds the total numbers per column.
 
-    per_acc = total/sum(total)*100
+    per_acc = total/sum(total)*100 #percentage per column
     per_acc = per_acc.round(2)
 
-    col1,col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-    df_ = pd.DataFrame({'Event':['PER-INJURED','PER-KILLED','PED-INJURED','PED-KILLED','CYC-INJURED','CYC-KILLED','MOT-INJURED','MOT-KILLED'],
+    df_ = pd.DataFrame({'Event':['PER-INJURED', 'PER-KILLED', 'PED-INJURED', 'PED-KILLED', 'CYC-INJURED', 'CYC-KILLED', 'MOT-INJURED', 'MOT-KILLED'],
 	               'Perc': per_acc})
-
-    df_.set_index('Event',inplace=True)
 
     fig, ax = plt.subplots()
 
@@ -62,7 +61,7 @@ if df_acc.shape[0]>0:
     sns.set_theme(palette="dark", font="serif", font_scale= 0.5)
   
     # plotting data on chart
-    ax.pie(df_['Perc'], labels=df_.index, explode=explode, autopct='%.0f%%')
+    ax.pie(df_['Perc'], labels=df_["Event"], explode=explode, autopct='%.0f%%')
 
  
     
