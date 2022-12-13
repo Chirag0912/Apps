@@ -4,6 +4,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Hello",
     page_icon="👋",
+    layout ="wide"
 )
 
 st.write("# This is the New York Vehicle Collision Report! 👋")
@@ -24,4 +25,6 @@ st.markdown(
 """
 )
 
-#collision image?
+image_int = Image.open('cars.jpg')
+
+st.image(image_int, use_column_width = True)
