@@ -20,7 +20,7 @@ dist = list(df_['BOROUGH'].unique())
 dist.append('All')
 
 selected_dist = st.selectbox(
-    "What do want the BOROUGH?",
+    "Select a borough",
     dist
 )
 
